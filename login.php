@@ -1,4 +1,5 @@
 <?php
+// session start
 session_start();
 $error_fields = array();
 
