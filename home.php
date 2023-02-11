@@ -1,5 +1,19 @@
 <?php
 session_start();
+require "function.php";
+$select = new Select();
+if (isset($_SESSION["id"])) {
+  $user = $select->selectUserById($_SESSION["id"]);
+} else {
+  header("location: login.php");
+}
+
+require_once("vendor/autoload.php");
+$payCheck = new handelar("product");
+$result = $payCheck->select_records();
+foreach ($result as $res) {
+  $file = $res;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,22 +39,24 @@ session_start();
   <!-- As a heading -->
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
-      <h1 class="navbar-brand mb-0">welcom <?php if (isset($_SESSION["id"])) {
-                                              echo $_SESSION["username"];
-                                            } else {
-                                              header("location: logout.php");
-                                            } ?>
+      <h1 class="navbar-brand mb-0">welcom <?php echo $user["name"]; ?>
         in our world</h1>
     </div>
   </nav>
   <div class="card" style="width: 18rem;">
-    <a href="./payment.html"><img class="card-img-top" src="./assets/imgs/modern-flat-design-zip-archive-file-icon-web_599062-4480.avif" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-        content.</p></a>
-      <a href="./payment.html" class="btn btn-primary">Buy Now</a>
-    </div>
+    <img class="card-img-top" src="./assets/imgs/modern-flat-design-zip-archive-file-icon-web_599062-4480.avif" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+    
+    <!-- href="./payment.php" -->
+    <a class="btn btn-primary" href="<?php if ($file['downloads'] == 7) {
+      echo "payment.php";
+}else{
+  echo "download.php";
+} ?>">Buy Now</a>
+  </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
