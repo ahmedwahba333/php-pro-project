@@ -16,6 +16,13 @@ p{
 .form-group {
     margin-bottom: 0;
 }
+.signUpMsg{
+    text-decoration: none;
+    color: #FFC312;
+}
+.signUpMsg:hover{
+    color: #a17c0e;
+}
 .container{
 height: 100%;
 align-content: center;
